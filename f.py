@@ -27,7 +27,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-# In[ ]:
+# In[2]:
 
 
 def plot_categorical_and_continuous_vars(df, cat_col, cont_col):
@@ -80,7 +80,7 @@ def plot_categorical_and_continuous_vars(df, cat_col, cont_col):
 
 
 
-# In[ ]:
+# In[3]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -111,7 +111,7 @@ def mms_scale_data(train, validate, test):
 
 
 
-# In[2]:
+# In[4]:
 
 
 from sklearn.preprocessing import StandardScaler
@@ -142,7 +142,7 @@ def ss_scale_data(train, validate, test):
 
 
 
-# In[3]:
+# In[5]:
 
 
 def lin_reg(x_tr_data, y_tr_data, x_val_data, y_val_data):
@@ -155,19 +155,20 @@ def lin_reg(x_tr_data, y_tr_data, x_val_data, y_val_data):
     lm.fit(x_tr_data, y_tr_data)
 
     # predict train
-    y_tr_predict = lm.predict(x_tr_data)
+    y_tr_predict_lr = lm.predict(x_tr_data)
 
     # evaluate: rmse
-    rmse_train = mean_squared_error(y_tr_data, y_tr_predict)**(1/2)
+    rmse_train = mean_squared_error(y_tr_data, y_tr_predict_lr)**(1/2)
 
     # predict validate
-    y_val_predict = lm.predict(x_val_data)
+    y_val_predict_lr = lm.predict(x_val_data)
 
     # evaluate: rmse
-    rmse_validate = mean_squared_error(y_val_data, y_val_predict)**(1/2)
+    rmse_validate = mean_squared_error(y_val_data, y_val_predict_lr)**(1/2)
 
-    return print("RMSE for OLS using LinearRegression\nTraining/In-Sample: ", rmse_train.round(2), 
+    print("RMSE for OLS using LinearRegression\nTraining/In-Sample: ", rmse_train.round(2), 
           "\nValidation/Out-of-Sample: ", rmse_validate.round(2))
+    return y_tr_predict_lr, y_val_predict_lr
 
 
 # In[ ]:
@@ -176,7 +177,7 @@ def lin_reg(x_tr_data, y_tr_data, x_val_data, y_val_data):
 
 
 
-# In[ ]:
+# In[6]:
 
 
 def lasso_lars(x_tr_data, y_tr_data, x_val_data, y_val_data):
@@ -189,19 +190,20 @@ def lasso_lars(x_tr_data, y_tr_data, x_val_data, y_val_data):
     lm.fit(x_tr_data, y_tr_data)
 
     # predict train
-    y_tr_predict = lm.predict(x_tr_data)
+    y_tr_predict_lass = lm.predict(x_tr_data)
 
     # evaluate: rmse
-    rmse_train = mean_squared_error(y_tr_data, y_tr_predict)**(1/2)
+    rmse_train = mean_squared_error(y_tr_data, y_tr_predict_lass)**(1/2)
 
     # predict validate
-    y_val_predict = lm.predict(x_val_data)
+    y_val_predict_lass = lm.predict(x_val_data)
 
     # evaluate: rmse
-    rmse_validate = mean_squared_error(y_val_data, y_val_predict)**(1/2)
+    rmse_validate = mean_squared_error(y_val_data, y_val_predict_lass)**(1/2)
 
-    return print("RMSE for OLS using LassoLars\nTraining/In-Sample: ", rmse_train.round(2), 
+    print("RMSE for OLS using LassoLars\nTraining/In-Sample: ", rmse_train.round(2), 
           "\nValidation/Out-of-Sample: ", rmse_validate.round(2))
+    return y_tr_predict_lass, y_val_predict_lass
 
 
 # In[ ]:
@@ -210,7 +212,7 @@ def lasso_lars(x_tr_data, y_tr_data, x_val_data, y_val_data):
 
 
 
-# In[ ]:
+# In[7]:
 
 
 def glm(x_tr_data, y_tr_data, x_val_data, y_val_data):
@@ -223,19 +225,20 @@ def glm(x_tr_data, y_tr_data, x_val_data, y_val_data):
     lm.fit(x_tr_data, y_tr_data)
 
     # predict train
-    y_tr_predict = lm.predict(x_tr_data)
+    y_tr_predict_glm = lm.predict(x_tr_data)
 
     # evaluate: rmse
-    rmse_train = mean_squared_error(y_tr_data, y_tr_predict)**(1/2)
+    rmse_train = mean_squared_error(y_tr_data, y_tr_predict_glm)**(1/2)
 
     # predict validate
-    y_val_predict = lm.predict(x_val_data)
+    y_val_predict_glm = lm.predict(x_val_data)
 
     # evaluate: rmse
-    rmse_validate = mean_squared_error(y_val_data, y_val_predict)**(1/2)
+    rmse_validate = mean_squared_error(y_val_data, y_val_predict_glm)**(1/2)
 
-    return print("RMSE for OLS using GLM\nTraining/In-Sample: ", rmse_train.round(2), 
+    print("RMSE for OLS using GLM\nTraining/In-Sample: ", rmse_train.round(2), 
           "\nValidation/Out-of-Sample: ", rmse_validate.round(2))
+    return y_tr_predict_glm, y_val_predict_glm
 
 
 # In[ ]:
@@ -244,7 +247,7 @@ def glm(x_tr_data, y_tr_data, x_val_data, y_val_data):
 
 
 
-# In[4]:
+# In[8]:
 
 
 def polynomial_transform(x_tr_data, y_tr_data, x_val_data, y_val_data):
@@ -278,11 +281,7 @@ def polynomial_transform(x_tr_data, y_tr_data, x_val_data, y_val_data):
     print("RMSE for Polynomial Model, degrees=2\nTraining/In-Sample: ", rmse_train.round(2), 
           "\nValidation/Out-of-Sample: ", rmse_validate.round(2))
 
-
-# In[ ]:
-
-
-
+    return y_tr_data_deg2, y_val_data_deg2 
 
 
 # In[ ]:
@@ -291,11 +290,27 @@ def polynomial_transform(x_tr_data, y_tr_data, x_val_data, y_val_data):
 
 
 
-# In[ ]:
+# In[9]:
 
 
+# didnt use this loop, but i liked it and so i put t here for future use
 
 
+# #Create a looping statement to evaluate all models
+# models = [lm, lars, glm]
+# 
+# for model in models:
+#     y_train[str(model)] = model.predict(X_train)
+#     rmse_train = sqrt(mean_squared_error(y_train['tip'],
+#                                          y_train[str(model)]))
+#     
+#     y_valid[str(model)] = model.predict(X_valid)
+#     rmse_valid = sqrt(mean_squared_error(y_valid['tip'],
+#                                          y_valid[str(model)]))
+#     
+#     print('RMSE for {} model on the train dataset: {}.'.format(model, round(rmse_train, 2)))
+#     print('RMSE for {} model on the validate dataset: {}.'.format(model, round(rmse_valid, 2)))
+#     print()
 
 # In[ ]:
 
