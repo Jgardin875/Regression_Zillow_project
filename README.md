@@ -13,7 +13,28 @@ Wed afternoon - Present
 
 ### Data Dictionary
 
+#### Data Columns:
+'bed' = bedroom
+'bath' = bathroom
+'sqft' = square footage of house
+'tax_value' = home value
+'yearbuilt'= year house was built
+'fips' = county fips
+'6037.0' = a fips number
+'6059.0' =  a fips number
+'6111.0' = a fips number
 
+#### Model Columns:
+LinReg_tr        Linear Regression for Train set
+Poly_val         Polynomial Regression for Validate set
+Poly_tr          Polynomial Regression for Train set
+LassoLars_val    Lasso Lars for Validate set
+LinReg_val       Linear Regression for Validate set
+LassoLars_tr     Lasso Lars for Train set
+GLM_val          Tweedie Regression for Validate set
+GLM_tr           Tweedie Regression for Test set
+Baseline_val     Baseline (mean) for Validate set
+Baseline_tr      Baseline (mean) for Train set
 
 ### Steps to reproduce
 
@@ -42,21 +63,28 @@ Housing is a billion dollar industry for investors and possibly the biggest purc
 
 - What continous variables correlate with  housing prices?
 
-### Report findings
-
-Stong correlation in:
-        sqft
-        bath
+### Report findings:
 
 
-### Recommendations
+### County fips codes:
 
-Larger homes sell for more!
+6037.0 Los Angeles, CA \
+6059.0 Orange, CA \
+6111.0 Ventura, CA
+
+### Results
+Impoved base model rmse from 248562.35  (baseline train) to 210630.36 (poly deg = 2, no scale, train)
+which is a 15% improvement. 
+
+Sqft correlated strongest with the target value
 
 ### Future work
-- I would like to incorporate having bathrooms as a feature. 
 
-### Detailed Project Plan
+I would like to incorporate bathrooms into the model. That will take more time because they are catagorical and may risk turning into a sparse matrix if encoded outright. 
+
+I would also like to use robust scaling. Robust scaling is better at handling data with outliers.
+
+## Detailed Project Plan
 
 ### Acquire
 
