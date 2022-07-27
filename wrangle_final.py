@@ -164,7 +164,7 @@ def get_zillow_data():
 
 # # 2 
 
-# In[13]:
+# In[28]:
 
 
 def prep_zillow(df):
@@ -174,12 +174,12 @@ def prep_zillow(df):
     
     
     #deal with outliers
-    df = df[(df.bathroomcnt < 7) & (df.bathroomcnt > 0)]
+    df = df[(df.bathroomcnt < 5.5) & (df.bathroomcnt > 0)]
     df = df[(df.bedroomcnt < 7) & (df.bedroomcnt > 0)]
     df = df[df.taxamount < 25_000]
-    df = df[df.calculatedfinishedsquarefeet < 7_000]
+    df = df[df.calculatedfinishedsquarefeet < 5_500]
     df = df[df.yearbuilt>=1890]
-    df = df[df.taxvaluedollarcnt < 3_000_000]
+    df = df[df.taxvaluedollarcnt < 1_100_000]
     df = df[(df.regionidzip < 150_000)]
     
     #drop data leakage columns and search by columns that are no longer needed
@@ -202,7 +202,7 @@ def prep_zillow(df):
     
     return df
     
-    #total data loss from nulls and outliers: 3.07%
+    #total data loss from nulls and outliers: 9.3%
 
 
 # In[14]:
@@ -229,16 +229,16 @@ df = prep_zillow(df)
 df.shape
 
 
-# In[18]:
+# In[26]:
 
 
-52441-50831
+52441-47545
 
 
-# In[19]:
+# In[27]:
 
 
-1610/52441
+4896/52441
 
 
 # In[20]:
